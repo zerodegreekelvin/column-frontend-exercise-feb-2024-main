@@ -1,4 +1,4 @@
-import { Stack, Card, CardHeader, CardBody, Input,Heading, StackDivider } from '@chakra-ui/react'
+import { Stack, Card, CardHeader, CardBody, Heading, StackDivider } from '@chakra-ui/react'
 import Notice from './Notice';
 const Notices = ({notices}) => {
     return (
@@ -7,7 +7,7 @@ const Notices = ({notices}) => {
             <Heading size='md'>Public Notices</Heading>
           </CardHeader>
           <CardBody>
-            <Stack className="notice-list" divider={<StackDivider />} spacing='4'>
+            <Stack className="notice-list" divider={<StackDivider/>} spacing='4'>
             {
               notices.map(notice => (
                 <Notice key={notice.id} notice={notice}/>
