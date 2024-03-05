@@ -1,3 +1,23 @@
+# Some thoughts from Kelvin
+
+Hi thanks for looking the takehome!
+This was a fun little challenge to take and there's definitely room for improvement. Somoe things I would add are
+- end to end tests
+- additional unit tests
+- state management library i.e. Redux or Apollo Client
+
+The theme for this is dark mode due to the nature of the program it's best to have neutral colors rather than something that is too distracting.
+
+The firebase query is an interesting data store and definitely could use some form of caching or maybe some query optimization.
+
+Would love to chat more about my thought process.
+
+Thanks for taking the time to look through this
+
+Cheers,
+Kelvin
+
+
 # Column Frontend Exercise
 
 Your task is to create a public notice search application using React. The application should allow users to search for a notice by title and display relevant information. The primary goal is to demonstrate your proficiency in React, state management, and asynchronous data fetching via Firestore.

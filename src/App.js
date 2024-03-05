@@ -6,6 +6,8 @@ import { collection, query, orderBy, getDocs, limit, where, startAfter, endBefor
 import Notices from './components/Notices';
 import Sidebar from './components/Sidebar';
 import Searchbar from './components/Searchbar'
+
+//added some thoughts to the readme
 function App() {
 	const [notices, setNotices] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -26,7 +28,6 @@ function App() {
 				//firebase has a builtin pagination
 				let q;
 				if (startDate && endDate) {
-					console.log('inside second')
 					q = query(
 						noticesRef,
 						where('publicationDate', '>=', Timestamp.fromMillis(new Date(startDate).getTime())),
@@ -36,23 +37,18 @@ function App() {
 
 				}
 				else if(currentPage === 1 || addNewNotice) {
-					console.log('inside first')
-					console.log('addNewNotice', addNewNotice)
 					q = query(noticesRef, orderBy('publicationDate', 'desc'), limit(10));
 				}
 				
 				else if (pageDirection === 'next') {
-					console.log('inside third')
 					const lastNotice = notices[notices.length - 1];
 					q = query(noticesRef, orderBy('publicationDate', 'desc'), startAfter(lastNotice.publicationDate), limit(10));
 				}
 				else {
-					console.log('inside inside fourth')
 					const firstNotice = notices[0];
 					q = query(noticesRef, orderBy('publicationDate', 'desc'), endBefore(firstNotice.publicationDate), limit(10));
 				}
 				if (searchTerm) {
-					console.log('inside fifth')
 					q = query(noticesRef, where('title', '==', searchTerm), orderBy('publicationDate', 'desc'));
 				}
 				const querySnapshot = await getDocs(q);
