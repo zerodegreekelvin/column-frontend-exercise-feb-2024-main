@@ -6,7 +6,7 @@ import { addDoc } from 'firebase/firestore';
 jest.mock('firebase/firestore');
 
 describe('Sidebar', () => {
-  it('test_handleFormSubmit_addsDocument', async () => {
+  it('tests adding notice', async () => {
     const mockAddDoc = addDoc.mockResolvedValue({ id: 'abc123' });
     render(<Sidebar isAddingNewNotice={() => {}} />);
     
@@ -18,7 +18,7 @@ describe('Sidebar', () => {
     await waitFor(() => expect(mockAddDoc).toHaveBeenCalled());
   });
 
-  it('test_handleFormSubmit_handlesErrors', async () => {
+  it('tests handle submit error', async () => {
     const mockAddDoc = addDoc.mockRejectedValue(new Error('Failed to add document'));
     render(<Sidebar isAddingNewNotice={() => {}} />);
     
@@ -28,10 +28,9 @@ describe('Sidebar', () => {
     fireEvent.click(screen.getByText('Add Notice'));
 
     await waitFor(() => expect(mockAddDoc).toHaveBeenCalled());
-    // Here you would also check for some error handling behavior, like displaying an error message
   });
 
-  it('test_handleFormSubmit_resetsStateAfterAddingDocument', async () => {
+  it('test form reset', async () => {
     addDoc.mockResolvedValue({ id: 'abc123' });
     render(<Sidebar isAddingNewNotice={() => {}} />);
     
