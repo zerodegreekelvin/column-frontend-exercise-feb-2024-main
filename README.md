@@ -5,6 +5,7 @@ This was a fun little challenge to take and there's definitely room for improvem
 - end to end tests
 - additional unit tests
 - state management library i.e. Redux or Apollo Client
+- convert to typescript for type enforcement
 
 The theme for this is dark mode due to the nature of the program it's best to have neutral colors rather than something that is too distracting.
 
