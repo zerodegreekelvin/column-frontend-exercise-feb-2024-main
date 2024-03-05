@@ -30,16 +30,19 @@ const Sidebar = ({isAddingNewNotice}) => {
 				type="text"
 				placeholder="Title"
 				value={newNotice.title}
+                data-testId='Title'
 				onChange={(e) => setNewNotice({ ...newNotice, title: e.target.value })}
 			/>
 			<Input
 				type="date"
 				value={newNotice.publicationDate}
+                data-testId="Date"
 				onChange={(e) => setNewNotice({ ...newNotice, publicationDate: e.target.value })}
 			/>
 			<Textarea
 				type="text"
 				placeholder="Content"
+                data-TestId='Content'
 				value={newNotice.content}
 				onChange={(e) => setNewNotice({ ...newNotice, content: e.target.value })}
 			/>
