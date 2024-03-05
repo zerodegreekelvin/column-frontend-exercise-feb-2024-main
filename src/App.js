@@ -4,6 +4,8 @@ import { db } from './db'; // Import this line to use the Firestore database con
 import { Text, Spinner, Flex, Box, Stack, Input, Button } from '@chakra-ui/react'
 import { collection, query, orderBy, getDocs, limit, where, startAfter, endBefore } from 'firebase/firestore'
 import Notices from './components/Notices';
+import Sidebar from './components/Sidebar';
+
 function App() {
 	const [notices, setNotices] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -12,6 +14,7 @@ function App() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageDirection, setPageDirection] = useState('');
   	const [word, setWord] = useState('');
+	const [addNewNotice, isAddingNewNotice] = useState(false);
 	useEffect(() => {
 		const fetchNotices = async () => {
 			setLoading(true);
@@ -19,7 +22,7 @@ function App() {
 				const noticesRef = collection(db, 'notices');
 				//firebase has a builtin pagination
 				let q;
-				if(currentPage === 1) {
+				if(currentPage === 1 || addNewNotice) {
 				q = query(noticesRef, orderBy('publicationDate', 'desc'), limit(10));
 				}
 				else if (pageDirection === 'next') {
@@ -38,13 +41,14 @@ function App() {
 				const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 				setNotices(data);
 				setLoading(false);
+				isAddingNewNotice(false);
 			} catch (error) {
 				setError(error.message);
 				setLoading(false);
 			}
 		};
 		fetchNotices();
-	}, [searchTerm, currentPage, pageDirection]);
+	}, [searchTerm, currentPage, pageDirection, addNewNotice]);
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
@@ -68,6 +72,9 @@ function App() {
   if (error) return <div>There has been an error please try again later</div>;
   return (
     <Flex className="container">
+		<Box className='sidebar-container' w='250' pt='10' paddingLeft='10px'>
+			<Sidebar isAddingNewNotice={isAddingNewNotice} />
+		</Box>
 		<Box>
 			<Stack className="search-container" direction='row'>
 				<Input
