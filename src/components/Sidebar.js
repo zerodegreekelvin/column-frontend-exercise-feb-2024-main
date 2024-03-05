@@ -8,11 +8,8 @@ const Sidebar = ({isAddingNewNotice}) => {
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			console.log(new Date(newNotice.publicationDate).getTime())
 			let updatedNotice = {...newNotice, publicationDate: Timestamp.fromMillis(new Date(newNotice.publicationDate).getTime())}
-			console.log(updatedNotice)
 			const docRef = await addDoc(collection(db, 'notices'), updatedNotice);
-			console.log('Document written with ID: ', docRef.id);
             isAddingNewNotice(true);
 			setNewNotice({ title: '', publicationDate: '', content: '' });
             

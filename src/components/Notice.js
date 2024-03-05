@@ -1,7 +1,6 @@
 import { Box, Text } from '@chakra-ui/react'
 
 const Notice = ({notice}) => {
-	console.log(notice)
     return (
         <Box key={notice.id}>
 			<Text size='xs' fontSize='medium'>
